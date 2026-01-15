@@ -3,6 +3,16 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <p>Hello from a template!</p>
-    <p> My name is {{ name }}</p>
+    <h1>My Notes</h1>
+    <ul>
+        {% for note in notes %}
+            <li>
+                <strong>{{ note.title }}</strong>
+                <p>{{ note.content }}</p>
+            </li>
+        {% empty %}
+            <li>No notes yet.</li>
+        {% endfor %}
+    </ul>
+    
 {% endblock %}
