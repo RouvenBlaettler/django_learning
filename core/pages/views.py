@@ -3,4 +3,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 def pages_view(request):
-    return HttpResponse("Hello Django")
+    return render(request, "pages/home.html", {
+        "name": "Django Learner" 
+    })
