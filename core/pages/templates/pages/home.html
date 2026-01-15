@@ -3,16 +3,26 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>My Notes</h1>
-    <ul>
-        {% for note in notes %}
-            <li>
-                <strong>{{ note.title }}</strong>
-                <p>{{ note.content }}</p>
-            </li>
-        {% empty %}
-            <li>No notes yet.</li>
-        {% endfor %}
-    </ul>
+<h2>Add a New Note</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">save</button>
+</form>
+
+<hr>
+
+
+<h1>My Notes</h1>
+<ul>
+    {% for note in notes %}
+        <li>
+            <strong>{{ note.title }}</strong>
+            <p>{{ note.content }}</p>
+        </li>
+    {% empty %}
+        <li>No notes yet.</li>
+    {% endfor %}
+</ul>
     
 {% endblock %}
