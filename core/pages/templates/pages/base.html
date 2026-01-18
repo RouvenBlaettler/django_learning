@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>Notes App</title>
 </head>
 <body>
-    <h1>My Django App</h1>
 
+<nav>
+    {% if user.is_authenticated %}
+        <span>Welcome, {{ request.user.username }}!</span> |
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+</nav>
 
-    {% block content %}
-    {% endblock %}
+<hr>
+
+{% block content %}
+{% endblock %}
+
 </body>
 </html>

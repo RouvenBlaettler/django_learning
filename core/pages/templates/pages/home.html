@@ -1,9 +1,8 @@
 {% extends "pages/base.html" %}
 
-{% block title %}Home{% endblock %}
-
 {% block content %}
-<h2>Add a New Note</h2>
+<h2>{{request.user.username}}'s Notes</h2>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,7 +12,6 @@
 <hr>
 
 
-<h1>My Notes</h1>
 <ul>
     {% for note in notes %}
         <li>
