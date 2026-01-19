@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes App</title>
+    <title>{% block title %}Notes App{% endblock %}</title>
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
 
@@ -27,6 +29,9 @@
 {% endif %}
 
 {% block content %}
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
 
 </body>

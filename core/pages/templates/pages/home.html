@@ -1,7 +1,10 @@
 {% extends "pages/base.html" %}
 
+{% block title %}Home - Notes App{% endblock %}
+
 {% block content %}
-<h2>{{request.user.username}}'s Notes</h2>
+<h1>Your Notes</h1>
+
 
 <form method="post">
     {% csrf_token %}
