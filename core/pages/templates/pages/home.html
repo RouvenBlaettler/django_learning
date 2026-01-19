@@ -18,7 +18,7 @@
 <ul>
     {% for note in notes %}
         <li>
-            <strong>{{ note.title }}</strong>
+            <h3>{{ note.title }}</h3>
             <p>{{ note.content }}</p>
             <a href="{% url 'edit_note' note.id %}">Edit</a> |
             <a href="{% url 'delete_note' note.id %}">Delete</a>
