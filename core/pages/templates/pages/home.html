@@ -17,6 +17,8 @@
         <li>
             <strong>{{ note.title }}</strong>
             <p>{{ note.content }}</p>
+            <a href="{% url 'edit_note' note.id %}">Edit</a>
+            <hr>
         </li>
     {% empty %}
         <li>No notes yet.</li>

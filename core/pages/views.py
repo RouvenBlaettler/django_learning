@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Note
 from .forms import NoteForm
@@ -7,6 +7,20 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 
 @login_required
+def edit_note(request, note_id):
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+    if request.method == "POST":
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = NoteForm(instance=note)
+
+    return render(request, "pages/edit_note.html", {
+        "form": form
+    })
+
 def pages_view(request):
     notes = Note.objects.filter(user=request.user)
 
