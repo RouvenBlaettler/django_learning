@@ -15,14 +15,17 @@
 <hr>
 
 
+
+
 <ul>
     {% for note in notes %}
         <li>
-            <h3>{{ note.title }}</h3>
-            <p>{{ note.content }}</p>
-            <a href="{% url 'edit_note' note.id %}">Edit</a> |
-            <a href="{% url 'delete_note' note.id %}">Delete</a>
-            <hr>
+            <div class="note">
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.content }}</p>
+                <a href="{% url 'edit_note' note.id %}">Edit</a> |
+                <a href="{% url 'delete_note' note.id %}">Delete</a>
+            </div>
         </li>
     {% empty %}
         <li>No notes yet.</li>
