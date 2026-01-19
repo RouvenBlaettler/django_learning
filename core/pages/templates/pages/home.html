@@ -17,7 +17,8 @@
         <li>
             <strong>{{ note.title }}</strong>
             <p>{{ note.content }}</p>
-            <a href="{% url 'edit_note' note.id %}">Edit</a>
+            <a href="{% url 'edit_note' note.id %}">Edit</a> |
+            <a href="{% url 'delete_note' note.id %}">Delete</a>
             <hr>
         </li>
     {% empty %}

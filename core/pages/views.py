@@ -7,6 +7,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 
 @login_required
+def delete_note(request, note_id):
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+    if request.method == "POST":
+        note.delete()
+        return redirect('home')
+    return render(request, "pages/delete_note.html", {
+        "note": note
+    })
+
+
+
 def edit_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     if request.method == "POST":
