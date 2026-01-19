@@ -5,12 +5,14 @@ from .forms import NoteForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 @login_required
 def delete_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     if request.method == "POST":
         note.delete()
+        messages.success(request, "Note deleted successfully.")
         return redirect('home')
     return render(request, "pages/delete_note.html", {
         "note": note
@@ -24,6 +26,7 @@ def edit_note(request, note_id):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
+            messages.success(request, "Note updated successfully.")
             return redirect('home')
     else:
         form = NoteForm(instance=note)
@@ -41,6 +44,7 @@ def pages_view(request):
             note = form.save(commit=False)
             note.user = request.user
             note.save()
+            messages.success(request, "Note added successfully.")
             return redirect('home')
     else:
         form = NoteForm()
