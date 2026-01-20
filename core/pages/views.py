@@ -36,6 +36,8 @@ def edit_note(request, note_id):
     })
 
 def pages_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     notes = Note.objects.filter(user=request.user)
 
     if request.method == "POST":
