@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.db.models import Q
 
 @login_required
 def delete_note(request, note_id):
@@ -38,7 +39,16 @@ def edit_note(request, note_id):
 def pages_view(request):
     if not request.user.is_authenticated:
         return redirect('login')
+    
+    query = request.GET.get('q')
+
     notes = Note.objects.filter(user=request.user)
+
+    if query:
+        notes = notes.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+
 
     if request.method == "POST":
         form = NoteForm(request.POST)
